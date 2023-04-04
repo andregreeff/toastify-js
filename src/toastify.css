@@ -7,7 +7,6 @@
  */
 
 .toastify {
-    padding: 12px 20px;
     color: #ffffff;
     display: inline-block;
     box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(77, 96, 232, 0.3);
@@ -27,6 +26,11 @@
     opacity: 1;
 }
 
+.toast-message {
+    display: inline-block;
+    padding: 12px 20px;
+}
+
 .toast-close {
     background: transparent;
     border: 0;
@@ -35,7 +39,20 @@
     font-family: inherit;
     font-size: 1em;
     opacity: 0.4;
-    padding: 0 5px;
+    padding: 12px 20px;
+    vertical-align: top;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+.toastify-left .toast-message {
+    padding-left: 0;
+}
+
+.toastify-right .toast-message {
+    padding-right: 0;
 }
 
 .toastify-right {

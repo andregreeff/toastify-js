@@ -142,11 +142,15 @@
         // If we have a valid node, we insert it
         divElement.appendChild(this.options.node)
       } else {
+        // Otherwise, create a new node for the incoming message
+        var messageElement = document.createElement("span");
+        messageElement.className = "toast-message";
         if (this.options.escapeMarkup) {
-          divElement.innerText = this.options.text;
+          messageElement.innerText = this.options.text;
         } else {
-          divElement.innerHTML = this.options.text;
+          messageElement.innerHTML = this.options.text;
         }
+        divElement.appendChild(messageElement);
 
         if (this.options.avatar !== "") {
           var avatarElement = document.createElement("img");
