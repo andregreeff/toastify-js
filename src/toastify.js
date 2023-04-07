@@ -92,26 +92,35 @@
         throw "Toastify is not initialized";
       }
 
-      // Creating the DOM object
-      var divElement = document.createElement("div");
-      divElement.className = "toastify on " + this.options.className;
+      // Preparing the DOM element classes
+      var toastClasses = ["toastify", "on"];
+
+      this.options.className.split(" ").forEach(function (c) {
+        toastClasses.push(c);
+      });
 
       // Positioning toast to left or right or center
       if (!!this.options.position) {
-        divElement.className += " toastify-" + this.options.position;
+        toastClasses.push("toastify-" + this.options.position);
       } else {
         // To be depreciated in further versions
         if (this.options.positionLeft === true) {
-          divElement.className += " toastify-left";
+          toastClasses.push("toastify-left");
           console.warn("Property `positionLeft` will be depreciated in further versions. Please use `position` instead.");
         } else {
           // Default position
-          divElement.className += " toastify-right";
+          toastClasses.push("toastify-right");
         }
       }
 
       // Assigning gravity of element
-      divElement.className += " " + this.options.gravity;
+      toastClasses.push(this.options.gravity);
+
+      // Creating the DOM object
+      var divElement = document.createElement("div");
+
+      // Attach our calculated list of element classes
+      divElement.className = toastClasses.join(" ");
 
       // Announce the toast to screen readers
       if (this.options.ariaLive) {
