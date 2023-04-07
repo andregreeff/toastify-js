@@ -32,11 +32,14 @@
   position: fixed;
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-  cursor: pointer;
   border-radius: var(--toastify-border-radius);
   text-decoration: none;
   max-width: calc(50% - 20px);
   z-index: 2147483647;
+}
+
+.toastify.toastify-with-onclick {
+  cursor: pointer;
 }
 
 .toastify.on {

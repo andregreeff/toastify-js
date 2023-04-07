@@ -116,6 +116,10 @@
       // Assigning gravity of element
       toastClasses.push(this.options.gravity);
 
+      if (!!this.options.onClick) {
+        toastClasses.push("toastify-with-onclick");
+      }
+
       // Creating the DOM object
       var divElement = document.createElement("div");
 
