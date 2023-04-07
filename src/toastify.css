@@ -69,11 +69,11 @@
   opacity: 1;
 }
 
-.toastify-left .toast-message {
+.toastify-close-button.toastify-left .toast-message {
   padding-left: 0;
 }
 
-.toastify-right .toast-message {
+.toastify-close-button.toastify-right .toast-message {
   padding-right: 0;
 }
 
