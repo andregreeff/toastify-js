@@ -27,8 +27,7 @@
     node: undefined,
     duration: 3000,
     selector: undefined,
-    callback: function () {
-    },
+    callback: undefined,
     destination: undefined,
     newWindow: false,
     close: false,
@@ -38,8 +37,7 @@
     avatar: "",
     className: "",
     stopOnFocus: true,
-    onClick: function () {
-    },
+    onClick: undefined,
     offset: {x: 0, y: 0},
     escapeMarkup: true,
     ariaLive: 'polite'
@@ -319,7 +317,9 @@
           }
 
           // Calling the callback function
-          this.options.callback.call(toastElement);
+          if (typeof this.options.callback === "function") {
+            this.options.callback.call(toastElement);
+          }
 
           // Repositioning the toasts again
           Toastify.reposition();
