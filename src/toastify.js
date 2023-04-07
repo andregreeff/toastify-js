@@ -23,7 +23,6 @@
   // Set the default global options
   Toastify.defaults = {
     oldestFirst: true,
-    text: "Toastify is awesome!",
     node: undefined,
     duration: 3000,
     selector: undefined,
@@ -62,7 +61,7 @@
       this.toastElement = null;
 
       // Validating the options
-      this.options.text = options.text || Toastify.defaults.text; // Display message
+      this.options.text = options.text; // Display message
       this.options.node = options.node || Toastify.defaults.node; // Display content as node
       this.options.duration = options.duration === 0 ? 0 : options.duration || Toastify.defaults.duration; // Display duration
       this.options.selector = options.selector || Toastify.defaults.selector; // Parent selector
@@ -80,6 +79,11 @@
       this.options.offset = options.offset || Toastify.defaults.offset; // toast offset
       this.options.escapeMarkup = options.escapeMarkup !== undefined ? options.escapeMarkup : Toastify.defaults.escapeMarkup;
       this.options.ariaLive = options.ariaLive || Toastify.defaults.ariaLive;
+
+      // fail early if we have no message to show..
+      if (!this.options.text) {
+        throw Error("no message text provided for toast");
+      }
 
       // Returning the current object for chaining functions
       return this;
