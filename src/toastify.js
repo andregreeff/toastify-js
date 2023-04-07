@@ -213,14 +213,31 @@
         );
       }
 
-      if (typeof this.options.onClick === "function" && typeof this.options.destination === "undefined") {
-        divElement.addEventListener(
-          "click",
-          function (event) {
-            event.stopPropagation();
-            this.options.onClick();
-          }.bind(this)
-        );
+      if (typeof this.options.onClick !== "undefined" && typeof this.options.destination === "undefined") {
+        switch (typeof this.options.onClick) {
+          case "function":
+            divElement.addEventListener(
+              "click",
+              function (event) {
+                event.stopPropagation();
+                this.options.onClick();
+              }.bind(this)
+            );
+            break;
+          case "string":
+            if (this.options.onClick === "close") {
+              divElement.addEventListener(
+                "click",
+                function (event) {
+                  // DNM: shamelessly copy-pasted from the current "close" handler.. I'm just testing a theory.
+                  event.stopPropagation();
+                  this.removeElement(this.toastElement);
+                  window.clearTimeout(this.toastElement.timeOutValue);
+                }.bind(this)
+              );
+            }
+            break;
+        }
       }
 
       // Adding offset
