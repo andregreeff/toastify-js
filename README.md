@@ -15,14 +15,12 @@ Toastify is a lightweight, vanilla JS toast notification library.
 ## Features
 
 * Multiple stacked notifications
-* Customizable
 * No blocking of execution thread
 
 ### Customization options
 
 * Notification Text
 * Duration
-* Toast background color
 * Close icon display
 * Display position
 * Offset position
@@ -31,7 +29,7 @@ Toastify is a lightweight, vanilla JS toast notification library.
 
 #### Toastify now supports installation via NPM
 
-* Run the below command to add toastify-js to your exisitng or new project.
+* Run the below command to add toastify-js to your existing or new project.
 
 ```
 npm install --save toastify-js
@@ -55,7 +53,7 @@ You can use the default CSS from Toastify as below and later override it or choo
 import "toastify-js/src/toastify.css"
 ```
 
-#### Adding ToastifyJs to HTML page using the traditional method
+#### Adding Toastify to HTML page using the traditional method
 
 To start using **Toastify**, add the following CSS on to your page.
 
@@ -73,90 +71,152 @@ And the script at the bottom of the page
 
 ## Documentation
 
+New toasts are created by calling the core `Toastify` function, and then shown to the user by calling it's `showToast` function.
+
 ```javascript
 Toastify({
-  text: "This is a toast",
-  duration: 3000,
-  destination: "https://github.com/apvarun/toastify-js",
-  newWindow: true,
-  close: true,
-  gravity: "top", // `top` or `bottom`
-  position: "left", // `left`, `center` or `right`
-  stopOnFocus: true, // Prevents dismissing of toast on hover
-  style: {
-    background: "linear-gradient(to right, #00b09b, #96c93d)",
-  },
-  onClick: function(){} // Callback after click
+  text: "This is a simple toast using default values.."
 }).showToast();
 ```
+
+Toast are configured by means of specific keys in the configuration object passed in at the time of creation.
 
 > Toast messages will be centered on devices with screen width less than 360px.
 
 * See the [changelog](https://github.com/apvarun/toastify-js/blob/master/CHANGELOG.md)
 
-### Add own custom classes
-
-If you want to use custom classes on the toast for customizing (like info or warning for example), you can do that as follows:
-
-```javascript
-Toastify({
-  text: "This is a toast",
-  className: "info",
-  style: {
-    background: "linear-gradient(to right, #00b09b, #96c93d)",
-  }
-}).showToast();
-```
-
-Multiple classes also can be assigned as a string, with spaces between class names.
-
-### Add some offset
-
-If you want to add offset to the toast, you can do that as follows:
-
-```javascript
-Toastify({
-  text: "This is a toast with offset",
-  offset: {
-    x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-    y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-  },
-}).showToast();
-```
-
-Toast will be pushed 50px from right in x axis and 10px from top in y axis.
-
-**Note:**
-
-If `position` is equals to `left`, it will be pushed from left.
-If `gravity` is equals to `bottom`, it will be pushed from bottom.
-
 ## API
 
-| Option Key | type | Usage | Defaults |
-|-----------------|----------------------|----------------------------------------------------------------------------|-------------|
-| text | string | Message to be displayed in the toast | "Hi there!" |
-| node | ELEMENT_NODE | Provide a node to be mounted inside the toast. `node` takes higher precedence over `text` |  |
-| duration | number | Duration for which the toast should be displayed.<br>-1 for permanent toast | 3000 |
-| selector | string \| ELEMENT_NODE | ShadowRoot | CSS Selector or Element Node on which the toast should be added | body |
-| destination | URL string | URL to which the browser should be navigated on click of the toast |  |
-| newWindow | boolean | Decides whether the `destination` should be opened in a new window or not | false |
-| close | boolean | To show the close icon or not | false |
-| gravity | "top" or "bottom" | To show the toast from top or bottom | "top" |
-| position | "left" or "right" | To show the toast on left or right | "right" |
-| backgroundColor | CSS background value | To be deprecated, use `style.background` option instead. Sets the background color of the toast |  |
-| avatar | URL string | Image/icon to be shown before text |  |
-| className | string | Ability to provide custom class name for further customization |  |
-| stopOnFocus | boolean | To stop timer when hovered over the toast (Only if duration is set) | true |
-| callback | Function | Invoked when the toast is dismissed |  |
-| onClick | Function | Invoked when the toast is clicked |  |
-| offset | Object | Ability to add some offset to axis | |
-| escapeMarkup | boolean | Toggle the default behavior of escaping HTML markup | true |
-| style | object | Use the HTML DOM Style properties to add any style directly to toast | |
-| ariaLive | string | Announce the toast to screen readers, see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions for options | "polite" |
-| oldestFirst | boolean | Set the order in which toasts are stacked in page | true |
+### `text` string (required)
 
-> Deprecated properties: `backgroundColor` -  use `style.background` option instead
+Message to be displayed in the toast
+
+* default: `undefined`
+* notes:
+  * toast will fail to render if a message is not provided.
+
+### `node` ELEMENT_NODE
+
+Provide a node to be mounted inside the toast. `node` takes higher precedence over `text`
+
+* default: `undefined`
+
+### `duration` number
+
+Duration for which the toast should be displayed.
+
+* default: `3000`
+* options:
+  * any positive integer in milliseconds
+  * `-1` for a persistent toast that must be explicitly dismissed
+* notes:
+  * this implicitly enables `close` unless `onClick` is defined
+
+### `selector` string | ELEMENT_NODE | ShadowRoot
+
+CSS Selector or Element Node on which the toast should be added
+
+* default: `body`
+
+### `destination` URL string
+
+URL to which the browser should be navigated on click of the toast
+
+* default: `undefined`
+
+### `newWindow` boolean
+
+Decides whether the `destination` should be opened in a new window or not
+
+* default: `false`
+
+### `close` boolean
+
+To show the close icon or not
+
+* default: `false`
+
+### `gravity` "top" or "bottom"
+
+To show the toast from top or bottom
+
+* default: `"top"`
+* options:
+  * `"top"` to start lining up toasts from the top viewport edge
+  * `"bottom"` to start lining up toasts from the bottom viewport edge
+
+### `position` "left" or "right"
+
+To show the toast on left or right
+
+* default: `"right"`
+* options:
+  * `"left"` to position toast along the left viewport edge
+  * `"right"` to position toast along the right viewport edge
+
+### `avatar` URL string
+
+Image/icon to be shown before text
+
+* default: `undefined`
+
+### `className` string
+
+Ability to provide custom class name for further customization
+
+* default: `undefined`
+
+### `stopOnFocus` boolean
+
+To stop timer when hovered over the toast (Only if duration is set)
+
+* default: `true`
+
+### `callback` Function
+
+Invoked when the toast is dismissed
+
+* default: `undefined`
+
+### `onClick` Function
+
+Invoked when the toast is clicked
+
+* default: `undefined`
+
+### `offset` Object
+
+Ability to add some offset to axis
+
+* default: `undefined`
+* options:
+  * `{ x: number }` to set the horizontal offset
+  * `{ y: number }` to set the vertical offset
+  * `{ x: number, y: number }` to set the both offsets
+* notes:
+  * if `position` or `gravity` are used, this offset will push the toast inwards from the relevant edge.
+
+### `escapeMarkup` boolean
+
+Toggle the default behavior of escaping HTML markup
+
+* default: `true`
+
+### `ariaLive` string
+
+Announce the toast to screen readers, see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions for options
+
+* default: `"polite"`
+* options:
+  * `"off"` will prevent screen readers from reading the notification
+  * `"polite"` will cause screen readers to read the notification when the user is next idle
+  * `"assertive"` will cause screen readers to read the notification as soon as it is shown
+
+### `oldestFirst` boolean
+
+Set the order in which toasts are stacked in page
+
+* default: `true`
 
 ## Browsers support
 
