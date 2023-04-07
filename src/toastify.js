@@ -35,7 +35,6 @@
     gravity: "toastify-top",
     positionLeft: false,
     position: '',
-    backgroundColor: '',
     avatar: "",
     className: "",
     stopOnFocus: true,
@@ -43,8 +42,7 @@
     },
     offset: {x: 0, y: 0},
     escapeMarkup: true,
-    ariaLive: 'polite',
-    style: {background: ''}
+    ariaLive: 'polite'
   };
 
   // Defining the prototype of the object
@@ -77,7 +75,6 @@
       this.options.gravity = options.gravity === "bottom" ? "toastify-bottom" : Toastify.defaults.gravity; // toast position - top or bottom
       this.options.positionLeft = options.positionLeft || Toastify.defaults.positionLeft; // toast position - left or right
       this.options.position = options.position || Toastify.defaults.position; // toast position - left or right
-      this.options.backgroundColor = options.backgroundColor || Toastify.defaults.backgroundColor; // toast background color
       this.options.avatar = options.avatar || Toastify.defaults.avatar; // img element src - url or a path
       this.options.className = options.className || Toastify.defaults.className; // additional class names for the toast
       this.options.stopOnFocus = options.stopOnFocus === undefined ? Toastify.defaults.stopOnFocus : options.stopOnFocus; // stop timeout on focus
@@ -85,10 +82,6 @@
       this.options.offset = options.offset || Toastify.defaults.offset; // toast offset
       this.options.escapeMarkup = options.escapeMarkup !== undefined ? options.escapeMarkup : Toastify.defaults.escapeMarkup;
       this.options.ariaLive = options.ariaLive || Toastify.defaults.ariaLive;
-      this.options.style = options.style || Toastify.defaults.style;
-      if(options.backgroundColor) {
-        this.options.style.background = options.backgroundColor;
-      }
 
       // Returning the current object for chaining functions
       return this;
@@ -121,16 +114,6 @@
 
       // Assigning gravity of element
       divElement.className += " " + this.options.gravity;
-
-      if (this.options.backgroundColor) {
-        // This is being deprecated in favor of using the style HTML DOM property
-        console.warn('DEPRECATION NOTICE: "backgroundColor" is being deprecated. Please use the "style.background" property.');
-      }
-
-      // Loop through our style object and apply styles to divElement
-      for (var property in this.options.style) {
-        divElement.style[property] = this.options.style[property];
-      }
 
       // Announce the toast to screen readers
       if (this.options.ariaLive) {
